@@ -300,17 +300,23 @@ export default function Profile({ route, navigation }) {
           {renderUserMoreRatings()}
 
           {/* ACTITVITY */}
-          <View style={{ flex: 1, backgroundColor: "green" }}>
+          {/* <View
+            style={{
+              flex: 1,
+              // backgroundColor: "green"
+            }}
+          >
             <Text>Verified 'NUM OF TIMES HERE!!!!' in {seller.location}</Text>
             <Text>Joined {seller.joined} (ACTIVE SINCE WHEN???)</Text>
-          </View>
+          </View> */}
 
           {/* ITEMS */}
           <TouchableOpacity
             onPress={() => navigation.navigate(itemTabs, { userId, sellerId })}
             style={{
               flex: 1,
-              backgroundColor: "yellow",
+              // backgroundColor: "yellow",
+              paddingHorizontal: SIZES.padding * 2,
               flexDirection: "row",
               justifyContent: "space-between",
             }}
@@ -326,7 +332,8 @@ export default function Profile({ route, navigation }) {
             onPress={() => navigation.navigate("Feedback", { sellerId })}
             style={{
               flex: 1,
-              backgroundColor: "pink",
+              // backgroundColor: "pink",
+              paddingHorizontal: SIZES.padding * 2,
               flexDirection: "row",
               justifyContent: "space-between",
             }}
@@ -343,7 +350,8 @@ export default function Profile({ route, navigation }) {
             onPress={() => navigation.navigate("reviewsTabs", { sellerId })}
             style={{
               flex: 1,
-              borderWidth: 1,
+              // borderWidth: 1,
+              paddingHorizontal: SIZES.padding * 2,
               flexDirection: "row",
               justifyContent: "space-between",
             }}

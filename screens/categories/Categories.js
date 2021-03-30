@@ -40,7 +40,7 @@ export default function Categories({ navigation }) {
         useRightBtns={["search-outline", "notifications-outline"]}
       />
       <KeyboardAwareScrollView enableOnAndroid showsVerticalScrollIndicator={false}>
-        <View style={{ paddingBottom: 30 }}>
+        <View>
           <Text style={styles.subheader}>For Sale</Text>
 
           <FlatButtons options={categoryOptions} navigateTo={navigateTo} navigation={navigation} />

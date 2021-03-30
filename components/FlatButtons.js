@@ -4,9 +4,9 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { SIZES } from "../constants";
 
-export default function FlatButtons({ options, navigateTo, navigation }) {
+export default function FlatButtons({ options, navigateTo }) {
   return (
-    <View>
+    <View style={{ paddingBottom: 25 }}>
       {options.map((option, index) => {
         return (
           <TouchableOpacity key={`option-${index}`} onPress={() => navigateTo(option)}>

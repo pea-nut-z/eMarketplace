@@ -10,12 +10,14 @@ export default function MyAccount({ navigation }) {
   // MOCK USERID
   const userId = 111;
   const userInfo = useSelector((state) => state.members[userId]);
-
-  // const renderProfilePicAndBtn = () => {
-  //   return (
-
-  //   );
-  // };
+  const flatBtnOptions = locationOptions.concat(infoOptions);
+  const navigateTo = (option) => {
+    // navigation.navigate("Category", {
+    //   userId,
+    //   selectedCategory: option.name,
+    // });
+    return;
+  };
 
   const renderCamerabtn = () => {
     return (
@@ -85,21 +87,14 @@ export default function MyAccount({ navigation }) {
         </View>
 
         {/* FLAT BUTTONS */}
-        <FlatButtons options={locationOptions} navigation={navigation} />
-        <FlatButtons options={infoOptions} navigation={navigation} />
+        <FlatButtons options={flatBtnOptions} navigateTo={navigateTo} />
+        {/* <FlatButtons options={infoOptions} navigateTo={navigateTo} /> */}
       </KeyboardAwareScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  profileButton: {
-    // position: 'absolute',
-    // top: SIZES.height * 0.2,
-    // paddingVertical: SIZES.padding,
-    // paddingHorizontal: SIZES.padding * 2,
-  },
-
   button: {
     alignItems: "center",
     justifyContent: "center",
