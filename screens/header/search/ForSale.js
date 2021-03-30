@@ -93,7 +93,7 @@ export default function ForSale({
             <Text style={styles.boldText}>Tips</Text>
             <Text style={styles.regularText}>
               •Make sure your keyword was entered correctly.{"\n"}
-              •Search in more general terms, e.g. red bag > bag.{"\n"}
+              •Search in more general terms, e.g. bag not red bag.{"\n"}
               •Add search alerts and get notified of new listings.
             </Text>
           </View>

@@ -1,9 +1,10 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { SIZES, COLORS, viewOptions, locationOptions, infoOptions } from "../../constants";
 import { Header, CircleButton, FlatButtons, MemberInfo } from "../../components";
 import { useSelector } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function MyAccount({ navigation }) {
   // MOCK USERID
@@ -56,7 +57,7 @@ export default function MyAccount({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
       <Header title={"My Account"} useRightBtns={["settings-outline"]} />
-      <ScrollView>
+      <KeyboardAwareScrollView enableOnAndroid showsVerticalScrollIndicator={false}>
         {/* PROFILE DISPLAY */}
         <View>{renderCamerabtn()}</View>
 
@@ -86,7 +87,7 @@ export default function MyAccount({ navigation }) {
         {/* FLAT BUTTONS */}
         <FlatButtons options={locationOptions} navigation={navigation} />
         <FlatButtons options={infoOptions} navigation={navigation} />
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </View>
   );
 }

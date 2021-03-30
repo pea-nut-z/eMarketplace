@@ -1,14 +1,20 @@
-import React, { useEffect, useMemo } from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import { ItemCards } from "../../../components";
+import React, { useMemo } from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  StyleSheet,
+} from "react-native";
 import { filterMembers } from "../../../store/selectors";
 import { useSelector } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
 import { SIZES, COLORS, FONTS } from "../../../constants";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-export default function User({ userId, navigation, submittedSearchString }) {
+export default function User({ userId, navigation, submittedSearchString, hideSearchHistory }) {
   const focused = useIsFocused();
-
   const getMembers = useMemo(filterMembers, []);
   const members = useSelector((state) => {
     if (focused && submittedSearchString) {
@@ -76,9 +82,16 @@ export default function User({ userId, navigation, submittedSearchString }) {
   };
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       {renderNoResultsMsg()}
-      {renderMemberCards()}
+      <TouchableWithoutFeedback
+        style={{ flex: 1, paddingBottom: 30, backgroundColor: "pink" }}
+        onPress={() => hideSearchHistory()}
+      >
+        <KeyboardAwareScrollView enableOnAndroid showsVerticalScrollIndicator={false}>
+          {renderMemberCards()}
+        </KeyboardAwareScrollView>
+      </TouchableWithoutFeedback>
     </View>
   );
 }

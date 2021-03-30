@@ -1,18 +1,9 @@
 import React, { useMemo, useState } from "react";
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  FlatList,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { createSelector } from "reselect";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { COLORS, SIZES, FONTS } from "../../constants";
-import { Header, HeaderButton, ItemCards, ModalAlert } from "../../components";
+import { Header, ItemCards, ModalAlert } from "../../components";
 import * as actions from "../../store/actionTypes";
 
 import { filterListings } from "../../store/selectors";
@@ -20,19 +11,14 @@ import { filterListings } from "../../store/selectors";
 export default function Home({ navigation }) {
   // MOCK USER
   const userId = 111;
-
-  const [draftAlert, setDraftAlert] = useState(false);
-
   const getActiveListings = useMemo(filterListings, []);
   const activeListings = useSelector((state) =>
     getActiveListings(userId, state.listings, state.members, state.restrictions, state.feeds, "feed")
   );
   const draftItemId = useSelector((state) => state["drafts"][userId]);
-  const useritems = useSelector((state) => state["listings"][userId]);
-
-  const draft = useSelector((state) => state["drafts"]);
-
   const dispatch = useDispatch();
+
+  const [draftAlert, setDraftAlert] = useState(false);
 
   const closeModal = () => {
     setDraftAlert(false);

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { View, Keyboard, Text } from "react-native";
+import { View, Keyboard } from "react-native";
 import { ForSale, User } from "../screens";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { Header } from "../components";
 import Filters from "../screens/header/search/Filters";
 
-import { COLORS, SIZES } from "../constants";
+import { COLORS } from "../constants";
 const MaterialTopTabs = createMaterialTopTabNavigator();
 
 export default function searchTabs({ route, navigation }) {
@@ -139,6 +139,7 @@ export default function searchTabs({ route, navigation }) {
                   userId={userId}
                   navigation={navigation}
                   submittedSearchString={submittedSearchString}
+                  hideSearchHistory={hideSearchHistory}
                 />
               )}
             />
