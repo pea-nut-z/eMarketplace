@@ -1,5 +1,5 @@
-import React from 'react';
-import {createSelector} from 'reselect';
+import React from "react";
+import { createSelector } from "reselect";
 
 // ALL MEMBERS'LISTINGS
 // excluding current user's items
@@ -18,7 +18,7 @@ export const selectListings = () =>
         if (restriction.block.includes(sellerId)) continue;
         if (restriction.hide.includes(sellerId)) continue;
         for (let itemId in listings[sellerId]) {
-          if (!listings[sellerId][itemId]['status']) continue; // SKIP DRAFTS
+          if (!listings[sellerId][itemId]["status"]) continue; // SKIP DRAFTS
           itemId = parseInt(itemId);
           const item = {
             sellerId,
@@ -31,7 +31,7 @@ export const selectListings = () =>
       }
       arr.sort((a, b) => new Date(a.date) < new Date(b.date));
       return arr;
-    },
+    }
   );
 
 export const filterListings = (userId, listings, members, restrictions) =>
@@ -45,32 +45,26 @@ export const filterListings = (userId, listings, members, restrictions) =>
     (_, __, ___, ____, _____, ______, value) => value,
     (items, __, ___, ____, feed, filter, value) => {
       switch (filter) {
-        case 'feed':
-          return items.filter(
-            (item) => feed.includes(item.category) && item.status === 'Active',
-          );
-        case 'category':
-          return items.filter(
-            (item) => item.category === value && item.status === 'Active',
-          );
-        case 'string':
-          const words = value.split(' ');
+        case "feed":
+          return items.filter((item) => feed.includes(item.category) && item.status === "Active");
+        case "category":
+          return items.filter((item) => item.category === value && item.status === "Active");
+        case "string":
+          const words = value.split(" ");
           let exp = words.map((word) => {
-            return '\\b' + word + '\\b';
+            return "\\b" + word + "\\b";
           });
-          exp = exp.join('|');
-          const regex = new RegExp(exp, 'i');
+          exp = exp.join("|");
+          const regex = new RegExp(exp, "i");
           return items.filter((item) => {
             return (
-              item.title.match(regex) ||
-              item.description.match(regex) ||
-              item.category.match(regex)
+              item.title.match(regex) || item.description.match(regex) || item.category.match(regex)
             );
           });
         default:
           new Error(`Unknown filter: ${filter}`);
       }
-    },
+    }
   );
 
 export const furtherFilterListings = (
@@ -80,36 +74,18 @@ export const furtherFilterListings = (
   restrictions,
   feeds,
   initialFilter,
-  value,
+  value
 ) =>
   createSelector(
-    filterListings(
-      userId,
-      listings,
-      members,
-      restrictions,
-      feeds,
-      initialFilter,
-      value,
-    ),
+    filterListings(userId, listings, members, restrictions, feeds, initialFilter, value),
     (_, listings) => listings,
     (_, __, members) => members,
     (_, __, ___, restrictions) => restrictions,
     (_, __, ___, ____, feeds) => feeds,
     (_, __, ___, ____, _____, initialFilter) => initialFilter,
     (_, __, ___, ____, _____, ______, value) => value,
-    (_, __, ___, ____, _____, ______, _______, furtherFilters) =>
-      furtherFilters,
-    (
-      items,
-      listings,
-      members,
-      restrictions,
-      feeds,
-      initialFilter,
-      value,
-      furtherFilters,
-    ) => {
+    (_, __, ___, ____, _____, ______, _______, furtherFilters) => furtherFilters,
+    (items, listings, members, restrictions, feeds, initialFilter, value, furtherFilters) => {
       // console.log({items});
       // console.log({listings});
       // console.log({members});
@@ -119,17 +95,11 @@ export const furtherFilterListings = (
       // console.log({value});
       // console.log({furtherFilters});
       if (items.length === 0) return;
-      const {
-        hideSoldItems,
-        categories,
-        minPrice,
-        maxPrice,
-        sort,
-      } = furtherFilters;
+      const { hideSoldItems, categories, minPrice, maxPrice, sort } = furtherFilters;
 
       // SOLD?
       if (hideSoldItems) {
-        items = items.filter((item) => item.status !== 'Sold');
+        items = items.filter((item) => item.status !== "Sold");
         if (items.length === 0) return;
       }
 
@@ -142,23 +112,23 @@ export const furtherFilterListings = (
       }
 
       // Sort?
-      if (sort === 'Relevance') {
-        let searchWords = value.split(' ');
+      if (sort === "Relevance") {
+        let searchWords = value.split(" ");
         items = items.map((item) => {
           let score = 0;
           searchWords.forEach((word) => {
-            const exp = '\\b' + word + '\\b';
-            const regex = new RegExp(exp, 'i');
+            const exp = "\\b" + word + "\\b";
+            const regex = new RegExp(exp, "i");
             item.category.match(regex) && ++score;
             item.description.match(regex) && ++score;
             item.title.match(regex) && ++score;
           });
-          return {...item, score};
+          return { ...item, score };
         });
         return items.sort((a, b) => a.score < b.score);
       }
 
-      if (sort === 'Most recent') {
+      if (sort === "Most recent") {
         items.sort((a, b) => new Date(a.date) < new Date(b.date));
       }
 
@@ -173,7 +143,7 @@ export const furtherFilterListings = (
         if (items.length === 0) return;
       }
       return items;
-    },
+    }
   );
 
 export const selectMembers = () =>
@@ -190,7 +160,7 @@ export const selectMembers = () =>
         arr.push(member);
       }
       return arr;
-    },
+    }
   );
 
 export const filterMembers = (state) =>
@@ -201,11 +171,11 @@ export const filterMembers = (state) =>
     (members, filter, value) => {
       const filteredMembers = members.filter((member) => {
         const string = value.trim();
-        const regex = new RegExp(string, 'i');
+        const regex = new RegExp(string, "i");
         return member.memberId.match(regex) || member.username.match(regex);
       });
       return filteredMembers.length === 0 ? null : filteredMembers;
-    },
+    }
   );
 
 // INDIVIDUAL MEMBER - ITEMS
@@ -219,13 +189,13 @@ export const selectMemberAllItems = () =>
       const arr = [];
       for (const key in items) {
         const itemId = parseInt(key);
-        if (!items[key]['status']) continue; // SKIPS ALL DRAFTS
-        const item = {...items[key], itemId, sellerId: memberId};
+        if (!items[key]["status"]) continue; // SKIPS ALL DRAFTS
+        const item = { ...items[key], itemId, sellerId: memberId };
         arr.push(item);
       }
       arr.sort((a, b) => new Date(a.date) < new Date(b.date));
       return arr;
-    },
+    }
   );
 
 export const filterMemberItems = (state, memberId) =>
@@ -236,35 +206,51 @@ export const filterMemberItems = (state, memberId) =>
     (_, __, ___, filter) => filter,
     (items, memberId, itemId, filter) => {
       switch (filter) {
-        case 'four-other-items':
+        case "four-other-items":
           return items.filter((item) => item.itemId !== itemId).slice(0, 4);
-        case 'active':
-          return items.filter((item) => item.status === 'Active');
-        case 'sold':
-          return items.filter((item) => item.status === 'Sold');
-        case 'hidden':
-          return items.filter((item) => item.status === 'Hidden');
-        case 'active-and-reserved':
-          return items.filter(
-            (item) => item.status === 'Active' || item.status === 'Reserved',
-          );
+        case "active":
+          return items.filter((item) => item.status === "Active");
+        case "sold":
+          return items.filter((item) => item.status === "Sold");
+        case "hidden":
+          return items.filter((item) => item.status === "Hidden");
+        case "active-and-reserved":
+          return items.filter((item) => item.status === "Active" || item.status === "Reserved");
         default:
           new Error(`Unknown filter: ${filter}`);
       }
-    },
+    }
   );
 
 // FAVOURITES
 export const selectSellersAndListingsByFav = createSelector(
   (userFavs) => userFavs,
   (userFavs, members) => userFavs.map((fav) => members[fav.sellerId]),
-  (userFavs, __, listings) =>
-    userFavs.map((fav) => listings[fav.sellerId][fav.itemId]),
+  (userFavs, __, listings) => userFavs.map((fav) => listings[fav.sellerId][fav.itemId]),
   (userFavs, members, listings) => {
     return userFavs.map((fav, index) => ({
       ...fav,
       ...members[index],
       ...listings[index],
     }));
-  },
+  }
+);
+
+// REVIEWS
+export const selectReviews = createSelector(
+  (reviews) => reviews,
+  (reviews, members) => reviews.map((review) => members[review.reviewerId]),
+  (reviews, memberInfo) => {
+    return reviews.map((review, index) => {
+      const name = memberInfo[index]["username"];
+      const displayPic = memberInfo[index]["displayPic"];
+      const location = memberInfo[index]["location"];
+      return {
+        ...review,
+        name,
+        displayPic,
+        location,
+      };
+    });
+  }
 );

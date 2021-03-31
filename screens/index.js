@@ -17,13 +17,14 @@ import CustomizeFeed from "./header/CustomizeFeed";
 import Filters from "./header/search/Filters";
 import Activity from "./header/notifications/Activity";
 import SearchAlerts from "./header/notifications/SearchAlerts";
+import Report from "./header/Report";
 import Profile from "./Profile";
 import EditProfile from "./my-account/EditProfile";
 import Feedback from "./my-account/Feedback";
-import AllReviews from "./reviews-tabs/AllReviews";
-import Buyers from "./reviews-tabs/Buyers";
-import Sellers from "./reviews-tabs/Sellers";
-import Report from "./header/Report";
+import AllReviews from "./reviews/AllReviews";
+import Buyers from "./reviews/Buyers";
+import Sellers from "./reviews/Sellers";
+import Rate from "./reviews/Rate";
 
 export {
   Home,
@@ -51,5 +52,6 @@ export {
   AllReviews,
   Sellers,
   Buyers,
+  Rate,
   Report,
 };

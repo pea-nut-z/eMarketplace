@@ -335,6 +335,33 @@ const drafts = {
   222: 3,
 };
 
+const reviews = {
+  222: {
+    reviews: [
+      {
+        reviewerId: 333,
+        date: new Date("Thu Feb 04 2021 20:36:28 GMT-0500 (Eastern Standard Time").toString(),
+        rating: 5,
+        headline: "Product as described",
+        review: "Thank you!",
+      },
+      {
+        reviewerId: 111,
+        date: new Date("Thu Feb 04 2021 20:36:28 GMT-0500 (Eastern Standard Time").toString(),
+        rating: 1,
+        headline: "Did not show up",
+        review: "!",
+      },
+    ],
+    total: 5,
+    reviewers: [333],
+  },
+  333: {
+    reviews: [],
+    total: 0,
+    reviewers: [],
+  },
+};
 const usersReducer = (state = members, action) => {
   const { userId, username, image } = action;
 
@@ -588,6 +615,48 @@ const draftsReducer = (state = drafts, action) => {
       return state;
   }
 };
+
+const reviewsReducer = (state = reviews, action) => {
+  const { memberId, reviewerId } = action;
+
+  switch (action.type) {
+    case actions.REVIEW_ADDED:
+      const reviewReplaced = state[memberId]["reviewers"].includes(reviewerId) ? true : false;
+      const prevRating =
+        reviewReplaced &&
+        state[memberId]["reviews"].filter((reviewer) => reviewer.reviewerId === reviewerId)[0]
+          .rating;
+
+      return {
+        ...state,
+        [memberId]: {
+          ...state[memberId],
+          reviews: reviewReplaced
+            ? state[memberId]["reviews"]
+                .filter((review) => review.reviewerId !== reviewerId)
+                .concat({
+                  reviewerId,
+                  date: new Date().toString(),
+                  ...action.payload,
+                })
+            : state[memberId]["reviews"].concat({
+                reviewerId,
+                date: new Date().toString(),
+                ...action.payload,
+              }),
+
+          total: reviewReplaced
+            ? state[memberId]["total"] - prevRating + action.payload.rating
+            : state[memberId]["total"] + action.payload.rating,
+          reviewers: reviewReplaced
+            ? state[memberId]["reviewers"]
+            : [...state[memberId]["reviewers"], reviewerId],
+        },
+      };
+    default:
+      return state;
+  }
+};
 const rootReducer = combineReducers({
   members: usersReducer,
   listings: listingsReducer,
@@ -595,6 +664,7 @@ const rootReducer = combineReducers({
   feeds: feedsReducer,
   restrictions: restrictionsReducer,
   drafts: draftsReducer,
+  reviews: reviewsReducer,
 });
 
 export default rootReducer;

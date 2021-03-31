@@ -223,7 +223,7 @@ export default function Sell({ route, navigation }) {
         saveDraft={saveDraft}
         useBackBtn={true}
         useRightBtns={["checkmark-done"]}
-        submitPost={submitPost}
+        submitFunc={submitPost}
       />
 
       <KeyboardAwareScrollView

@@ -3,11 +3,11 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../constants";
 
-export default function HeaderButton({ userId, name, showPopoutMenu, submitPost, navigation }) {
+export default function HeaderButton({ userId, name, showPopoutMenu, submitFunc, navigation }) {
   const navigateTo = (keyword) => {
     switch (keyword) {
       case "checkmark":
-        return submitPost();
+        return submitFunc();
       case "search":
         return navigation.navigate("searchTabs", {
           userId,

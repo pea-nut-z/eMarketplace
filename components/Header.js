@@ -29,7 +29,7 @@ export default function Header({
   searchString,
   getSearchString,
   toggleFilterScreen,
-  submitPost,
+  submitFunc,
   useImgStyle,
   useBackBtn,
   useSearchBar,
@@ -218,7 +218,7 @@ export default function Header({
                 name={buttonName}
                 navigation={navigation}
                 showPopoutMenu={showPopoutMenu}
-                submitPost={submitPost}
+                submitFunc={submitFunc}
               />
             );
           })}

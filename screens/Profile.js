@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  TouchableWithoutFeedback,
-  SafeAreaView,
-  StyleSheet,
-} from "react-native";
+import { View, TouchableOpacity, Text, TouchableWithoutFeedback, StyleSheet } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Header, MemberInfo, MemberRating, ModalAlert } from "../components";
 import { SIZES, COLORS } from "../constants";
@@ -18,7 +11,11 @@ export default function Profile({ route, navigation }) {
 
   // SELECTORS
   const seller = useSelector((state) => state.members[sellerId]);
-  const numOfItems = useSelector((state) => Object.keys(state.listings[sellerId]).length);
+  const items = useSelector((state) => state.listings[sellerId]);
+  const numOfItems = items && Object.keys(items).length;
+
+  const numOfReviews = useSelector((state) => state["reviews"][sellerId]["reviewers"].length);
+
   const blockList = useSelector((state) => {
     if (!atCurrentUserProfile) {
       return state.restrictions[userId]["block"];
@@ -151,34 +148,6 @@ export default function Profile({ route, navigation }) {
     }
   };
 
-  const renderUserMoreRatings = () => {
-    return (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          alignItems: "center",
-          paddingHorizontal: SIZES.padding * 2,
-        }}
-      >
-        <View style={{ flexDirection: "row", width: "50%" }}>
-          <Ionicons name={"heart-outline"} size={25} color={COLORS.primary} />
-          <View>
-            <Text>Recommended - %</Text>
-            <Text>No data yet</Text>
-          </View>
-        </View>
-        <View style={{ flexDirection: "row", width: "50%" }}>
-          <Ionicons name={"chatbubble-outline"} size={25} color={COLORS.primary} />
-          <View>
-            <Text>Response - %</Text>
-            <Text>No data yet</Text>
-          </View>
-        </View>
-      </View>
-    );
-  };
-
   return (
     <View
       style={{
@@ -248,122 +217,88 @@ export default function Profile({ route, navigation }) {
       >
         {popupMenu && renderPopoutMenu()}
       </View>
+
       <TouchableWithoutFeedback onPress={() => hidePopoutMenu()}>
-        <View
-          style={{
-            flex: 1,
-          }}
-        >
+        <View style={{ flex: 1 }}>
           {/* MEMBER INFO */}
           <View
             style={{
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "space-between",
               alignItems: "center",
-              paddingTop: SIZES.padding * 3,
-              paddingHorizontal: SIZES.padding * 2,
+              flex: 1,
             }}
           >
-            <MemberInfo
-              picture={seller.displayPic}
-              name={seller.username}
-              location={seller.location}
-            />
+            <View style={styles.container}>
+              <MemberInfo
+                picture={seller.displayPic}
+                name={seller.username}
+                location={seller.location}
+              />
+            </View>
 
-            <MemberRating
-              rating={seller.rating}
-              explanation={true}
-              numOfReviews={seller.numOfReviews}
-            />
+            {/* RATE BUTTON  */}
+            {!atCurrentUserProfile && (
+              <View style={styles.container}>
+                <TouchableOpacity
+                  style={{
+                    ...styles.border,
+                    height: 40,
+                    width: SIZES.width - SIZES.padding * 4,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  onPress={() => {
+                    navigation.navigate("Rate", { userId, sellerId });
+                  }}
+                >
+                  <Text style={styles.boldText}>Rate</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+
+            <View style={styles.container}>
+              <MemberRating
+                rating={seller.rating}
+                explanation={true}
+                numOfReviews={seller.numOfReviews}
+              />
+            </View>
           </View>
 
-          {/* RATE BUTTON  */}
-          {!atCurrentUserProfile && (
-            <View style={{ paddingHorizontal: SIZES.padding * 2 }}>
-              <TouchableOpacity
-                style={{
-                  borderWidth: 1,
-                  height: 30,
-                  borderColor: COLORS.secondary,
-                  borderRadius: 5,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: SIZES.padding * 3,
-                }}
-              >
-                <Text style={styles.boldText}>Rate</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-
-          {renderUserMoreRatings()}
-
-          {/* ACTITVITY */}
-          {/* <View
-            style={{
-              flex: 1,
-              // backgroundColor: "green"
-            }}
-          >
-            <Text>Verified 'NUM OF TIMES HERE!!!!' in {seller.location}</Text>
-            <Text>Joined {seller.joined} (ACTIVE SINCE WHEN???)</Text>
-          </View> */}
-
           {/* ITEMS */}
-          <TouchableOpacity
-            onPress={() => navigation.navigate(itemTabs, { userId, sellerId })}
-            style={{
-              flex: 1,
-              // backgroundColor: "yellow",
-              paddingHorizontal: SIZES.padding * 2,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text>
-              {numOfItems} item{numOfItems > 1 ? "s" : null}
-            </Text>
-            <Ionicons name={"chevron-forward-outline"} size={25} />
-          </TouchableOpacity>
+          <View style={{ flex: 1 }}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(itemTabs, { userId, sellerId })}
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                justifyContent: "space-between",
+                ...styles.container,
+              }}
+            >
+              <Text style={{ fontSize: 16 }}>
+                {numOfItems ? numOfItems : 0} item{numOfItems > 1 ? "s" : null}
+              </Text>
+              <Ionicons name={"chevron-forward-outline"} size={25} />
+            </TouchableOpacity>
 
-          {/* FEEDBACK */}
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Feedback", { sellerId })}
-            style={{
-              flex: 1,
-              // backgroundColor: "pink",
-              paddingHorizontal: SIZES.padding * 2,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <View>
-              <Text>Feedback</Text>
-              <Text>No positive feedback yet</Text>
-            </View>
-            <Ionicons name={"chevron-forward-outline"} size={25} />
-          </TouchableOpacity>
-
-          {/* REVIEWS */}
-          <TouchableOpacity
-            onPress={() => navigation.navigate("reviewsTabs", { sellerId })}
-            style={{
-              flex: 1,
-              // borderWidth: 1,
-              paddingHorizontal: SIZES.padding * 2,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <View>
-              <Text>0 reviews</Text>
-              <Text>No reviews yet</Text>
-            </View>
-            <Ionicons name={"chevron-forward-outline"} size={25} />
-          </TouchableOpacity>
-          <SafeAreaView />
-          {/* ENDS */}
+            {/* REVIEWS */}
+            <TouchableOpacity
+              onPress={() => navigation.navigate("AllReviews", { memberId: sellerId })}
+              style={{
+                flex: 3,
+                flexDirection: "row",
+                justifyContent: "space-between",
+                ...styles.container,
+              }}
+            >
+              <View>
+                <Text style={{ fontSize: 16 }}>
+                  {numOfReviews ? numOfReviews : 0} review{numOfReviews > 1 ? "s" : null}
+                </Text>
+              </View>
+              <Ionicons name={"chevron-forward-outline"} size={25} />
+            </TouchableOpacity>
+          </View>
         </View>
       </TouchableWithoutFeedback>
     </View>
@@ -371,6 +306,15 @@ export default function Profile({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: SIZES.padding * 2,
+    paddingVertical: SIZES.padding * 2,
+  },
+  border: {
+    borderWidth: 1,
+    borderColor: COLORS.secondary,
+    borderRadius: 5,
+  },
   popupMenuContainer: {
     backgroundColor: COLORS.white,
     shadowOffset: { width: 3, height: 3 },

@@ -9,12 +9,12 @@ import {
   Platform,
   Keyboard,
   SafeAreaView,
-  Modal,
 } from "react-native";
 import { Header } from "../../components";
 import { SIZES, COLORS } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
+import Modal from "react-native-modal";
 import * as ImagePicker from "expo-image-picker";
 import * as actions from "../../store/actionTypes";
 
@@ -83,61 +83,38 @@ export default function EditProfile({ route, navigation }) {
 
   const renderPopUpMenu = () => {
     return (
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={popupMenu}
-        onRequestClose={() => setPopupMenu(false)}
-      >
-        <View
+      <Modal isVisible={popupMenu} onBackdropPress={() => setPopupMenu(false)}>
+        <TouchableOpacity
+          onPress={() => choosePhotoFromLibrary()}
           style={{
-            marginTop: SIZES.height * 0.5,
+            height: 65,
+            backgroundColor: "pink",
+            //   backgroundColor: COLORS.white,
+            flexDirection: "row",
+            alignItems: "center",
+            paddingHorizontal: SIZES.padding * 2,
           }}
         >
-          <TouchableOpacity
-            onPress={() => choosePhotoFromLibrary()}
-            style={{
-              height: 65,
-              backgroundColor: COLORS.white,
-              flexDirection: "row",
-              alignItems: "center",
-              paddingHorizontal: SIZES.padding * 2,
-            }}
-          >
-            <Ionicons name={"image-outline"} size={35} />
-            <Text style={{ marginLeft: SIZES.padding * 2 }}>Choose from album</Text>
-          </TouchableOpacity>
+          <Ionicons name={"image-outline"} size={35} />
+          <Text style={{ marginLeft: SIZES.padding * 2 }}>Choose from album</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => {
-              setDisplayPic("N/A");
-              setPopupMenu(false);
-            }}
-            style={{
-              height: 65,
-              backgroundColor: COLORS.white,
-              flexDirection: "row",
-              alignItems: "center",
-              paddingHorizontal: SIZES.padding * 2,
-            }}
-          >
-            <Ionicons name={"trash-outline"} size={35} />
-            <Text style={{ marginLeft: SIZES.padding * 2 }}>Delete profile photo</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setPopupMenu(false)}
-            style={{
-              height: 65,
-              backgroundColor: COLORS.white,
-              flexDirection: "row",
-              alignItems: "center",
-              paddingHorizontal: SIZES.padding * 2,
-            }}
-          >
-            <Ionicons name={"arrow-undo-outline"} size={35} />
-            <Text style={{ marginLeft: SIZES.padding * 2 }}>Cancel</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={() => {
+            setDisplayPic("N/A");
+            setPopupMenu(false);
+          }}
+          style={{
+            height: 65,
+            backgroundColor: COLORS.white,
+            flexDirection: "row",
+            alignItems: "center",
+            paddingHorizontal: SIZES.padding * 2,
+          }}
+        >
+          <Ionicons name={"trash-outline"} size={35} />
+          <Text style={{ marginLeft: SIZES.padding * 2 }}>Delete profile photo</Text>
+        </TouchableOpacity>
       </Modal>
     );
   };
