@@ -1,9 +1,10 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect, ScrollView } from "react";
 import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useDispatch, useSelector } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
+import { useScrollToTop } from "@react-navigation/native";
 
 import {
   Header,
@@ -22,18 +23,18 @@ export default function itemDetails({ route, navigation }) {
   const { userId, sellerId, itemId, newItem } = route.params;
 
   // SELLER INFO
-  const seller = useSelector((state) => state.members[sellerId]);
+  const seller = useSelector((state) => state["members"][sellerId]);
 
   // CURRENT ITEM INFO
   const item = useSelector((state) => {
-    return state.listings[sellerId][itemId];
+    return state["listings"][sellerId][itemId];
   });
 
   const itemImages = item.images;
   const useImgStyle = typeof item.images[0] === "number" ? false : true;
 
   // USER'S FAVOURITES
-  const favs = useSelector((state) => state.favourites[userId]);
+  const favs = useSelector((state) => state["favourites"][userId]);
   const isFav = favs.find((item) => item.itemId === itemId);
 
   // SELLER'S LISTINGS
@@ -91,12 +92,7 @@ export default function itemDetails({ route, navigation }) {
             atItemDetails={true}
           />
 
-          <MemberRating
-            rating={seller.rating}
-            explanation={true}
-            numOfReviews={seller.numOfReviews}
-            atItemDetails={true}
-          />
+          <MemberRating memberId={sellerId} atItemDetails={true} />
         </TouchableOpacity>
 
         <Border />

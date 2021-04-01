@@ -256,11 +256,7 @@ export default function Profile({ route, navigation }) {
             )}
 
             <View style={styles.container}>
-              <MemberRating
-                rating={seller.rating}
-                explanation={true}
-                numOfReviews={seller.numOfReviews}
-              />
+              <MemberRating memberId={sellerId} />
             </View>
           </View>
 
@@ -283,7 +279,7 @@ export default function Profile({ route, navigation }) {
 
             {/* REVIEWS */}
             <TouchableOpacity
-              onPress={() => navigation.navigate("AllReviews", { memberId: sellerId })}
+              onPress={() => navigation.navigate("AllReviews", { userId, memberId: sellerId })}
               style={{
                 flex: 3,
                 flexDirection: "row",

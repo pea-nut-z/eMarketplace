@@ -14,16 +14,12 @@ const members = {
     location: "Toronto",
     displayPic: "N/A",
     joined: "November 15, 2021",
-    rating: 3,
-    numOfReviews: 3,
   },
   222: {
     username: "Paul",
     location: "Etobicoke",
     displayPic: "https://cdn.britannica.com/64/126664-050-35C7CECA/Paul-Newman.jpg",
     joined: "March 22, 2019",
-    rating: 1,
-    numOfReviews: 30,
   },
   333: {
     username: "Jennifer",
@@ -31,8 +27,6 @@ const members = {
     displayPic:
       "https://media-exp1.licdn.com/dms/image/C4D03AQFqL3K7Xm2ySg/profile-displayphoto-shrink_200_200/0/1604292859762?e=1620864000&v=beta&t=x1edHswOrFkSJMX8P1NyCZgGG-1Jqa1ADdOkHeAxeqs",
     joined: "January 02, 2020",
-    rating: 5,
-    numOfReviews: 10,
   },
 };
 
@@ -336,6 +330,11 @@ const drafts = {
 };
 
 const reviews = {
+  111: {
+    reviews: [],
+    total: 0,
+    reviewers: [],
+  },
   222: {
     reviews: [
       {
@@ -353,8 +352,8 @@ const reviews = {
         review: "!",
       },
     ],
-    total: 5,
-    reviewers: [333],
+    total: 6,
+    reviewers: [333, 111],
   },
   333: {
     reviews: [],

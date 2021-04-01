@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import {
   // FONTS,
   COLORS,
+  SIZES,
 } from "../constants";
 
 export default function MemberInfo({ picture, name, location, id, atItemDetails }) {
@@ -28,7 +29,7 @@ export default function MemberInfo({ picture, name, location, id, atItemDetails 
       )}
 
       <Text style={textVariables}>
-        {name} • {location}
+        {name} {location && `• ${location}`}
         {id && ` • #${id}`}
       </Text>
     </View>
@@ -38,6 +39,7 @@ export default function MemberInfo({ picture, name, location, id, atItemDetails 
 const styles = StyleSheet.create({
   profileText: {
     // ...FONTS.h4,
+    marginTop: SIZES.padding,
     textAlign: "center",
   },
   profile: {
@@ -49,6 +51,7 @@ const styles = StyleSheet.create({
   },
   itemDetailsText: {
     // ...FONTS.body4,
+    marginTop: SIZES.padding,
     textAlign: "center",
   },
   itemDetails: {

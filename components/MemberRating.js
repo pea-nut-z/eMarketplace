@@ -1,15 +1,21 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
 import { icons, COLORS, SIZES } from "../constants";
 import Tooltip from "rn-tooltip";
 
-export default function MemberRating({ rating, numOfReviews, atItemDetails }) {
+export default function MemberRating({ memberId, atItemDetails }) {
+  //  MEMBER RATING INFO
+  const totalRating = useSelector((state) => state["reviews"][memberId]["total"]);
+  const numOfReviews = useSelector((state) => state["reviews"][memberId]["reviewers"].length);
+  const average = totalRating / numOfReviews;
+
   const styleVariables = atItemDetails ? styles.itemDetails : styles.profile;
   const textVariables = atItemDetails ? styles.itemDetailsText : styles.profileText;
 
-  const emojiName = rating <= 2 ? icons.unamused : rating >= 4 ? icons.excited : icons.happy;
+  const emojiName = average <= 2 ? icons.unamused : average >= 4 ? icons.excited : icons.happy;
 
   const numerOfStars = [1, 2, 3, 4, 5];
 
@@ -38,7 +44,7 @@ export default function MemberRating({ rating, numOfReviews, atItemDetails }) {
           }}
         >
           {numerOfStars.map((num, index) => {
-            return rating >= num ? (
+            return average >= num ? (
               <Ionicons
                 key={`star-${index}`}
                 name={"star"}

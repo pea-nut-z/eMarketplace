@@ -1,46 +1,49 @@
-import React, {useMemo} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import {filterMemberItems} from '../store/selectors';
-import {useSelector} from 'react-redux';
-import {FONTS, SIZES, COLORS} from '../constants';
+import React, { useMemo } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { filterMemberItems } from "../store/selectors";
+import { useSelector } from "react-redux";
+import { FONTS, SIZES, COLORS } from "../constants";
 
-export default function SellerOtherItems({sellerId, itemId, navigation}) {
+export default function SellerOtherItems({ sellerId, itemId, navigation }) {
   const getOtherItems = useMemo(filterMemberItems, []);
   const otherItems = useSelector((state) =>
-    getOtherItems(state, sellerId, itemId, 'four-other-items'),
+    getOtherItems(state, sellerId, itemId, "four-other-items")
   );
 
   return (
     <View
       style={{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-      }}>
+        flexDirection: "row",
+        flexWrap: "wrap",
+        alignItems: "flex-start",
+        justifyContent: "center",
+      }}
+    >
       {otherItems.map((item) => {
         const sellerId = item.sellerId;
         const itemId = item.itemId;
-        const img = item['images'][0];
+        const img = item["images"][0];
         return (
           <TouchableOpacity
             key={itemId}
             onPress={() => {
-              navigation.navigate('itemDetails', {
+              navigation.navigate("itemDetails", {
                 sellerId,
                 itemId,
               });
-            }}>
+            }}
+          >
             <View
               style={{
                 width: SIZES.width / 2 - SIZES.padding * 2,
                 height: SIZES.width / 2,
-                justifyContent: 'center',
-              }}>
-              <View style={{alignItems: 'center'}}>
+                justifyContent: "center",
+              }}
+            >
+              <View style={{ alignItems: "center" }}>
                 <Image
-                  source={typeof img === 'number' ? img : {uri: img}}
-                  resizeMode={'contain'}
+                  source={typeof img === "number" ? img : { uri: img }}
+                  resizeMode={"contain"}
                   style={{
                     paddingVertical: SIZES.padding,
                     width: SIZES.width / 2 - SIZES.padding * 6,
@@ -48,8 +51,7 @@ export default function SellerOtherItems({sellerId, itemId, navigation}) {
                     borderWidth: 1,
                     borderRadius: 10,
                     borderColor: COLORS.secondary,
-                    backgroundColor:
-                      typeof img === 'number' ? COLORS.secondary : COLORS.white,
+                    backgroundColor: typeof img === "number" ? COLORS.secondary : COLORS.white,
                   }}
                 />
               </View>
@@ -57,10 +59,11 @@ export default function SellerOtherItems({sellerId, itemId, navigation}) {
                 style={{
                   marginLeft: SIZES.padding * 2,
                   marginVertical: SIZES.padding / 2,
-                }}>
+                }}
+              >
                 {item.title}
               </Text>
-              <Text style={{marginLeft: SIZES.padding * 2}}>${item.price}</Text>
+              <Text style={{ marginLeft: SIZES.padding * 2 }}>${item.price}</Text>
             </View>
           </TouchableOpacity>
         );

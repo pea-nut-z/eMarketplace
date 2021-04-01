@@ -1,4 +1,3 @@
-import React from "react";
 import { createSelector } from "reselect";
 
 // ALL MEMBERS'LISTINGS
@@ -86,14 +85,6 @@ export const furtherFilterListings = (
     (_, __, ___, ____, _____, ______, value) => value,
     (_, __, ___, ____, _____, ______, _______, furtherFilters) => furtherFilters,
     (items, listings, members, restrictions, feeds, initialFilter, value, furtherFilters) => {
-      // console.log({items});
-      // console.log({listings});
-      // console.log({members});
-      // console.log({restrictions});
-      // console.log({feeds});
-      // console.log({initialFilter});
-      // console.log({value});
-      // console.log({furtherFilters});
       if (items.length === 0) return;
       const { hideSoldItems, categories, minPrice, maxPrice, sort } = furtherFilters;
 
@@ -179,8 +170,6 @@ export const filterMembers = (state) =>
   );
 
 // INDIVIDUAL MEMBER - ITEMS
-export const selectItemViewNums = createSelector((item) => item.views);
-
 export const selectMemberAllItems = () =>
   createSelector(
     (state, memberId) => state.listings[memberId],
