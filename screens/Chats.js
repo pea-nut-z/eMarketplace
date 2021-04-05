@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -10,8 +10,11 @@ import {
 } from "react-native";
 import { Header } from "../components";
 import { icons, SIZES, FONTS, COLORS } from "../constants";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export default function Chats() {
+  const userId = 111;
+
   return (
     <View>
       <Header title={"Chats"} />
@@ -19,17 +22,4 @@ export default function Chats() {
   );
 }
 
-const styles = StyleSheet.create({
-  header: {
-    height: 57,
-    paddingVertical: SIZES.padding,
-    paddingHorizontal: SIZES.padding * 2,
-    borderWidth: 1,
-    borderColor: COLORS.transparent,
-    borderBottomColor: COLORS.secondary,
-  },
-  headerText: {
-    // ...FONTS.h3,
-    paddingTop: 10,
-  },
-});
+const styles = StyleSheet.create({});

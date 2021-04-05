@@ -1,3 +1,5 @@
+import Login from "./auth/Login";
+import Signup from "./auth/Signup";
 import Home from "./home/Home";
 import Sell from "./home/Sell";
 import Categories from "./categories/Categories";
@@ -27,6 +29,8 @@ import Sellers from "./reviews/Sellers";
 import Rate from "./reviews/Rate";
 
 export {
+  Login,
+  Signup,
   Home,
   Sell,
   itemDetails,

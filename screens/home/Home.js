@@ -5,11 +5,14 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { COLORS, SIZES, FONTS } from "../../constants";
 import { Header, ItemCards, ModalAlert } from "../../components";
 import * as actions from "../../store/actionTypes";
-
 import { filterListings } from "../../store/selectors";
+import { useAuth } from "../../AuthContext";
 
 export default function Home({ navigation }) {
   // MOCK USER
+  const { uid } = useAuth().currentUser;
+
+  console.log({ uid });
   const userId = 111;
   const getActiveListings = useMemo(filterListings, []);
   const activeListings = useSelector((state) =>
