@@ -4,11 +4,11 @@
 
 \*\*\*To view in the browser click the link below -> click 'Open project in the browser' -> click 'Open project' -> in the emulator click 'Open Project Using Expo'
 
-Choose to view the app in the browser or on your mobile [here](<[https://expo.io/@peanutz/projects/eMarketplace](https://expo.io/@peanutz/projects/eMarketplace)>)
+Choose to view the app in the browser or on your mobile [here](https://expo.io/@peanutz/projects/eMarketplace](https://expo.io/@peanutz/projects/eMarketplace)
 
 ### Context
 
-This app is built using React Native and Redux. My intention is to reverse engineer an app called [Karrot]([https://uk.karrotmarket.com/)](https://uk.karrotmarket.com/)-) - a marketplace. Chat, share and some functionalities under 'My Account' are unavailable because the purpose of this app is to demonstrate how state is maintained using Redux.
+This app is built using React Native and Redux. My intention is to reverse engineer an app called [Karrot](https://uk.karrotmarket.com/)](https://uk.karrotmarket.com/)-a marketplace. Chat, share and some functionalities under 'My Account' are unavailable because the purpose of this app is to demonstrate how state is maintained using Redux.
 
 ### To navigate
 
