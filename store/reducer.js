@@ -6,8 +6,15 @@ import { dateWithoutTime } from "../helper";
 // userId -> sellerId -> itemId
 
 // MOCK USER
-const userId = 111;
+// const userId = 111;
+// 644@gmail.com
+
 const dateTime = new Date();
+
+const accounts = {
+  CEzKopBqHhUaOuV4QLQHnyymiXq2: 111,
+};
+
 const members = {
   111: {
     username: "Tony",
@@ -361,13 +368,41 @@ const reviews = {
     reviewers: [],
   },
 };
+
+// dispatch({ type: actions.USER_ADDED, userId: id, username, location: "N/A" });
+// username: "Tony",
+// location: "Toronto",
+// displayPic: "N/A",
+// joined: "November 15, 2021",
+
+const accountsReducer = (state = accounts, action) => {
+  const { accountId, userId } = action;
+
+  switch (action.type) {
+    case actions.USER_ADDED:
+      return {
+        ...state,
+        [accountId]: userId,
+      };
+    default:
+      return state;
+  }
+};
+
 const usersReducer = (state = members, action) => {
   const { userId, username, image } = action;
 
   switch (action.type) {
     case actions.USER_ADDED:
-      // display pic is 'N/A'
-      return state;
+      return {
+        ...state,
+        [userId]: {
+          username,
+          location: "N/A",
+          displayPic: "N/A",
+          joined: dateWithoutTime(),
+        },
+      };
     case actions.USERNAME_CHANGED:
       return {
         ...state,
@@ -664,6 +699,7 @@ const rootReducer = combineReducers({
   restrictions: restrictionsReducer,
   drafts: draftsReducer,
   reviews: reviewsReducer,
+  accounts: accountsReducer,
 });
 
 export default rootReducer;

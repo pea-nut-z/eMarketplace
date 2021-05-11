@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -6,22 +6,45 @@ import { COLORS, SIZES, FONTS } from "../../constants";
 import { Header, ItemCards, ModalAlert } from "../../components";
 import * as actions from "../../store/actionTypes";
 import { filterListings } from "../../store/selectors";
-import { useAuth } from "../../AuthContext";
+// import { useAuth } from "../../AuthContext";
 
 export default function Home({ navigation }) {
   // MOCK USER
-  const { uid } = useAuth().currentUser;
-
-  console.log({ uid });
-  const userId = 111;
-  const getActiveListings = useMemo(filterListings, []);
-  const activeListings = useSelector((state) =>
-    getActiveListings(userId, state.listings, state.members, state.restrictions, state.feeds, "feed")
-  );
-  const draftItemId = useSelector((state) => state["drafts"][userId]);
-  const dispatch = useDispatch();
+  // const { uid } = useAuth().currentUser;
+  // console.log({ uid });
 
   const [draftAlert, setDraftAlert] = useState(false);
+  // const { currentUser } = useAuth();
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  // GET USERID
+
+  // const accountId = currentUser.uid;
+  // console.log("home id", accountId);
+
+  // const userId = useSelector((state) => state["accounts"][accountId]);
+  const userId = 111;
+  // }, []);
+
+  // const accounts = useSelector((state) => state.accounts);
+  // console.log({ userId });
+
+  // GET LISTINGS FOR SALE
+  const getActiveListings = useMemo(filterListings, []);
+  const activeListings = useSelector((state) =>
+    getActiveListings(
+      userId,
+      state["listings"],
+      state["members"],
+      state["restrictions"],
+      state["feeds"],
+      "feed"
+    )
+  );
+
+  // GET POST DRAFTS IF ANY
+  const draftItemId = useSelector((state) => state["drafts"][userId]);
 
   const closeModal = () => {
     setDraftAlert(false);

@@ -9,10 +9,9 @@ import {
 } from "@env";
 import * as firebase from "firebase";
 import "firebase/auth";
-import "firebase/firestore";
+// import "firebase/firestore";
 
-// if (firebase.apps.length === 0) {
-export const app = firebase.initializeApp({
+export const config = {
   apiKey: API_KEY,
   authDomain: AUTH_DOMAIN,
   databaseURL: DATABASE_URL,
@@ -20,8 +19,8 @@ export const app = firebase.initializeApp({
   storageBucket: STORAGE_BUCKET,
   messagingSenderId: MESSAGING_SENDER_ID,
   appId: APP_ID,
-});
-// }
+};
+export const app = firebase.initializeApp(config);
 
 export const auth = app.auth();
-export const db = firebase.firestore();
+// export const db = firebase.firestore().settings({ timestampsInSnapshots: true });

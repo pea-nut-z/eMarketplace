@@ -3,8 +3,8 @@ import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
-  Login,
-  Signup,
+  // Login,
+  // Signup,
   Home,
   Sell,
   itemDetails,
@@ -45,12 +45,12 @@ export default function App() {
             screenOptions={{
               headerShown: false,
             }}
-            // initialRouteName={"Home"}
-            initialRouteName={"Login"}
+            initialRouteName={"Home"}
+            // initialRouteName={"Login"}
           >
             {/* HOME */}
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Signup" component={Signup} />
+            {/* <Stack.Screen name="Login" component={Login} /> */}
+            {/* <Stack.Screen name="Signup" component={Signup} /> */}
             <Stack.Screen name="Home" component={bottomMainTabs} />
             <Stack.Screen name="Sell" component={Sell} />
             <Stack.Screen name="sellerItemsTabs" component={sellerItemsTabs} />

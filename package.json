@@ -42,7 +42,10 @@
     "react-native-textarea": "^1.0.4",
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.3",
+    "react-redux-firebase": "^3.10.0",
     "redux": "^4.0.5",
+    "redux-firestore": "^0.15.0",
+    "redux-thunk": "^2.3.0",
     "rn-tooltip": "^3.0.1"
   },
   "devDependencies": {

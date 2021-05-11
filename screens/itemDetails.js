@@ -14,7 +14,7 @@ import {
   SellerOtherItems,
   Border,
 } from "../components";
-import { FONTS, SIZES, categoryOptions, itemStatusOptions, COLORS } from "../constants";
+import { FONTS, SIZES, itemStatusOptions, COLORS } from "../constants";
 import { timeSince } from "../helper";
 import * as actions from "../store/actionTypes";
 import { selectMemberAllItems } from "../store/selectors";
