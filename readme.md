@@ -8,7 +8,7 @@ Choose to view the app in the browser or on your mobile [here](https://expo.io/@
 
 ### Context
 
-This app is built using React Native and Redux. My intention is to reverse engineer an app called [Karrot](https://uk.karrotmarket.com/)-a marketplace. Chat, share and some functionalities under 'My Account' are unavailable because the purpose of this app is to demonstrate how state is maintained using Redux.
+This app is built using React Native and Redux. My intention is to reverse engineer an app called [Karrot](https://uk.karrotmarket.com/)- a marketplace. Chat, share and some functionalities under 'My Account' are unavailable because the purpose of this app is to demonstrate how state is maintained using Redux.
 
 ### To navigate
 
@@ -17,11 +17,10 @@ Your username is Tony once you are on the app. The app includes:
 -Home-
 
 - Tap the orange sell button to post an item that you would like to sell
-- Search items by text and filter results
-- Search users by member ID
+- Search items by text and filter results (e.g. dress or makeup)
+- Search users by member ID (e.g. 222 or 333)
 - Customize your feeds by category
 - Scroll and view items posted by others
-
 - Tap an item to view its details
 - Favourite an item (see all favorite items under my account tab)
 - Tap the seller's profile picture to view seller's reviews and/or rate the seller

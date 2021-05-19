@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { categoryOptions, COLORS, FONTS, SIZES } from "../../constants";
-import Icon from "react-native-vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actionTypes";
 import { Header, ModalAlert } from "../../components";
@@ -79,7 +79,7 @@ export default function CustomizeFeed({ route, navigation }) {
                   height: 60,
                 }}
               >
-                <Icon
+                <Ionicons
                   name="checkmark-circle-outline"
                   size={25}
                   color={feed.includes(option.name) ? COLORS.primary : COLORS.secondary}

@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
 import { SIZES, COLORS, FONTS } from "../../../constants";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function User({ userId, navigation, submittedSearchString, hideSearchHistory }) {
   const focused = useIsFocused();
@@ -37,13 +38,11 @@ export default function User({ userId, navigation, submittedSearchString, hideSe
             style={styles.cardContainer}
           >
             <View>
-              <Image
-                source={{
-                  uri: member.displayPic,
-                }}
-                resizeMode={"contain"}
-                style={styles.img}
-              />
+              {member.displayPic !== "N/A" ? (
+                <Image source={{ uri: member.displayPic }} resizeMode={"contain"} />
+              ) : (
+                <Ionicons name={"person-circle-outline"} size={60} color={COLORS.secondary} />
+              )}
             </View>
             <View>
               <Text style={styles.cardText}>

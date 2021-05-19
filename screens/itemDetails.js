@@ -4,6 +4,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import DropDownPicker from "react-native-dropdown-picker";
 import { useDispatch, useSelector } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
+
 import { useScrollToTop } from "@react-navigation/native";
 
 import {
@@ -265,7 +266,7 @@ export default function itemDetails({ route, navigation }) {
               <Ionicons
                 name={isFav ? "heart" : "heart-outline"}
                 size={30}
-                color={isFav ? COLORS.primary : null}
+                color={isFav ? COLORS.primary : "black"}
               />
             </TouchableOpacity>
           </View>

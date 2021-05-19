@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, StatusBar } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { COLORS, SIZES, FONTS } from "../../constants";
@@ -77,6 +77,7 @@ export default function Home({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar />
       <Header
         userId={userId}
         navigation={navigation}
@@ -144,7 +145,6 @@ export default function Home({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
   shadow: {
     shadowColor: "#000",
     shadowOffset: {
@@ -155,8 +155,8 @@ const styles = StyleSheet.create({
   sellBtn: {
     position: "absolute",
     zIndex: 1,
-    bottom: SIZES.height * 0.1,
-    right: SIZES.padding * 2,
+    bottom: SIZES.height * 0.03,
+    right: SIZES.padding,
     height: 50,
     width: 100,
     justifyContent: "center",
@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: COLORS.white,
+    fontSize: 19,
     // ...FONTS.body2
   },
 });

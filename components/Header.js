@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import {
   SafeAreaView,
-  TouchableOpacity,
+  // TouchableOpacity,
   View,
   Text,
   StyleSheet,
   TextInput,
-  Button,
   TouchableWithoutFeedback,
   ScrollView,
 } from "react-native";
@@ -14,6 +13,7 @@ import { ModalAlert } from "../components";
 import { SIZES, COLORS } from "../constants";
 import { HeaderButton } from "./index";
 import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function Header({
   userId,
@@ -118,6 +118,7 @@ export default function Header({
             width: "90%",
             padding: 9,
             fontSize: 18,
+            height: 40,
           }}
         />
       </View>
@@ -128,14 +129,7 @@ export default function Header({
     if (recentSearches.length !== 0 && !searchString) {
       return (
         <View style={styles.searchBoxContainer}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              height: 40,
-            }}
-          >
+          <View style={styles.searchesAndDeleteContainer}>
             <Text style={styles.regularText}>Recent searches</Text>
             <TouchableOpacity
               style={{
@@ -158,40 +152,38 @@ export default function Header({
           <ScrollView>
             {recentSearches.map((item, index) => {
               return (
-                <TouchableOpacity
-                  key={`item-${index}`}
-                  style={styles.searchContainer}
-                  onPress={() => {
-                    getSearchString(item);
-                    submitSearchString(item);
-                  }}
-                >
-                  <View style={{ flexDirection: "row" }}>
-                    <View style={styles.searchIcon}>
-                      <Ionicons name={"pricetag-outline"} size={20} />
+                <View key={`item-${index}`} style={styles.searchStringContainer}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      getSearchString(item);
+                      submitSearchString(item);
+                    }}
+                  >
+                    <View style={styles.searchItem}>
+                      <View style={styles.searchIcon}>
+                        <Ionicons name={"pricetag-outline"} size={20} />
+                      </View>
+                      <View
+                        style={{
+                          justifyContent: "center",
+                          marginLeft: SIZES.padding,
+                        }}
+                      >
+                        <Text style={styles.regularText}>{item}</Text>
+                      </View>
                     </View>
-                    <View
-                      style={{
-                        justifyContent: "center",
-                        marginLeft: SIZES.padding,
-                      }}
-                    >
-                      <Text style={styles.regularText}>{item}</Text>
-                    </View>
-                  </View>
-                  <View>
-                    <Button
-                      title="x"
-                      color={COLORS.secondary}
-                      onPress={() => {
-                        const newSearches = recentSearches.filter(
-                          (previousItem) => previousItem !== item
-                        );
-                        setRecentSearches(newSearches);
-                      }}
-                    />
-                  </View>
-                </TouchableOpacity>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      const newSearches = recentSearches.filter(
+                        (previousItem) => previousItem !== item
+                      );
+                      setRecentSearches(newSearches);
+                    }}
+                  >
+                    <Text style={styles.deleteItemText}>X</Text>
+                  </TouchableOpacity>
+                </View>
               );
             })}
           </ScrollView>
@@ -236,12 +228,11 @@ export default function Header({
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "center",
+              // justifyContent: "space-between",
               alignItems: "center",
             }}
           >
             {/* BACK BUTTON */}
-
             {useBackBtn && renderBackBtn()}
             <ModalAlert
               visibleVariable={backBtnAlert}
@@ -266,7 +257,7 @@ export default function Header({
               <Text
                 style={{
                   ...styles.boldText,
-                  marginLeft: navigation ? SIZES.padding : 0,
+                  width: 210,
                 }}
               >
                 {title}
@@ -277,6 +268,7 @@ export default function Header({
           {useRightBtns && renderRightBtn()}
         </View>
       </TouchableWithoutFeedback>
+      {/* SEARCH HISTORY */}
       {useSearchHistory && renderRecentSearches()}
     </SafeAreaView>
   );
@@ -288,7 +280,7 @@ const styles = StyleSheet.create({
   },
   boldText: {
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 18,
     // ...FONTS.h4,
   },
   headerWithoutImg: {
@@ -300,6 +292,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     width: SIZES.width,
+    height: 55,
     backgroundColor: COLORS.white,
     justifyContent: "space-between",
   },
@@ -327,23 +320,45 @@ const styles = StyleSheet.create({
     width: "100%",
     position: "absolute",
     top: 109,
-    backgroundColor: COLORS.white,
     paddingHorizontal: SIZES.padding * 2,
+    backgroundColor: COLORS.white,
   },
-  searchContainer: {
+  searchesAndDeleteContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: 50,
+    height: 40,
+  },
+  searchStringContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    height: 65,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.secondary,
   },
   searchIcon: {
-    height: 30,
-    width: 30,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
+    height: 35,
+    width: 35,
     borderRadius: 20,
     borderWidth: 1,
     borderColor: COLORS.secondary,
     marginRight: SIZES.padding,
+  },
+  searchItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: 330,
+    height: 50,
+  },
+  deleteItemText: {
+    color: COLORS.darkgray,
+    height: "100%",
+    width: 60,
+    fontSize: 15,
+    textAlign: "center",
+    textAlignVertical: "center",
   },
 });

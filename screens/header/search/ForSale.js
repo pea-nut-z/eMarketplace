@@ -4,7 +4,8 @@ import { ItemCards } from "../../../components";
 import { furtherFilterListings } from "../../../store/selectors";
 import { useSelector } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Icon from "react-native-vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
+
 import { SIZES, COLORS, FONTS } from "../../../constants";
 import { useIsFocused } from "@react-navigation/native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -55,7 +56,7 @@ export default function ForSale({
             paddingHorizontal: SIZES.padding * 2,
           }}
         >
-          <Icon name={"funnel-outline"} size={20} color={isFilterUsed ? COLORS.primary : null} />
+          <Ionicons name={"funnel-outline"} size={20} color={isFilterUsed ? COLORS.primary : null} />
           <Text>Filter</Text>
         </TouchableOpacity>
       );
@@ -73,7 +74,7 @@ export default function ForSale({
             paddingHorizontal: SIZES.padding * 2,
           }}
         >
-          <Icon
+          <Ionicons
             name="checkmark-circle-outline"
             size={25}
             color={hideSoldItems ? COLORS.primary : COLORS.secondary}

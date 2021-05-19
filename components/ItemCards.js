@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { SIZES, FONTS, COLORS } from "../constants";
 import { ModalAlert } from "../components";
-import Icon from "react-native-vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
 import { timeSince } from "../helper";
 import { useDispatch } from "react-redux";
 import * as actions from "../store/actionTypes";
 import Modal from "react-native-modal";
-
 export default function ItemCards({
   userId,
   items,
@@ -35,7 +34,7 @@ export default function ItemCards({
             setOptionModal(true);
           }}
         >
-          <Icon name={"ellipsis-vertical-circle"} size={40} />
+          <Ionicons name={"ellipsis-vertical-circle"} size={40} />
         </TouchableOpacity>
       );
     }
@@ -267,10 +266,12 @@ export default function ItemCards({
                       </View>
                     )}
                     <Text
-                      style={{
-                        marginLeft: status !== "Active" ? SIZES.padding : null,
-                        // ...FONTS.h4,
-                      }}
+                      style={
+                        {
+                          // marginLeft: status !== "Active" ? SIZES.padding : null,
+                          // ...FONTS.h4,
+                        }
+                      }
                     >
                       $ {item.price}
                     </Text>
@@ -301,14 +302,14 @@ export default function ItemCards({
                         });
                       }}
                     >
-                      <Icon name={"heart"} size={30} color={COLORS.primary} />
+                      <Ionicons name={"heart"} size={30} color={COLORS.primary} />
                     </TouchableOpacity>
                     <View
                       style={{
                         flexDirection: "row",
                       }}
                     >
-                      <Icon name={"heart-outline"} size={15} color={COLORS.darkgray} />
+                      <Ionicons name={"heart-outline"} size={15} color={COLORS.darkgray} />
                       <Text> {item.favourites}</Text>
                     </View>
                   </View>
@@ -327,18 +328,16 @@ export default function ItemCards({
               >
                 <TouchableOpacity
                   style={{
-                    // borderWidth: 1,
                     width: "50%",
-                    justifyContent: "center",
-                    alignItems: "center",
                     paddingVertical: SIZES.padding,
                   }}
                   onPress={() => onClickOption("toggle-status", itemId, status)}
                 >
                   <Text
                     style={{
-                      // ...FONTS.body4,
+                      width: "100%",
                       fontWeight: "bold",
+                      textAlign: "center",
                     }}
                   >
                     {status === "Reserved" ? "Change to active" : "Change to reserved"}
@@ -349,15 +348,15 @@ export default function ItemCards({
                     borderLeftWidth: 1,
                     borderLeftColor: COLORS.secondary,
                     width: "50%",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    paddingVertical: SIZES.padding,
                   }}
                   onPress={() => onClickOption("Sold", itemId)}
                 >
                   <Text
                     style={{
-                      // ...FONTS.body4,
+                      width: "100%",
                       fontWeight: "bold",
+                      textAlign: "center",
                     }}
                   >
                     Change to sold
@@ -380,8 +379,9 @@ export default function ItemCards({
               >
                 <Text
                   style={{
-                    // ...FONTS.body4,
+                    width: "100%",
                     fontWeight: "bold",
+                    textAlign: "center",
                   }}
                 >
                   Change to unhidden
@@ -411,8 +411,9 @@ export default function ItemCards({
               >
                 <Text
                   style={{
-                    // ...FONTS.body4,
+                    width: "100%",
                     fontWeight: "bold",
+                    textAlign: "center",
                   }}
                 >
                   Leave review

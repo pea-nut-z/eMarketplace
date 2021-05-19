@@ -45,7 +45,7 @@ const TabBarCustomButton = ({ accessibilityState, children, onPress }) => {
       <TouchableOpacity
         style={{
           flex: 1,
-          height: 60,
+          height: 50,
           backgroundColor: COLORS.white,
         }}
         activeOpacity={1}
@@ -67,7 +67,7 @@ const CustomTabBar = (props) => {
           left: 0,
           right: 0,
           height: 30,
-          backgroundColor: COLORS.white,
+          backgroundColor: "transparent",
         }}
       ></View>
       <BottomTabBar {...props.props} />
@@ -83,6 +83,7 @@ export default function bottomMainTabs() {
         style: {
           borderTopWidth: 0,
           elevation: 0,
+
           backgroundColor: "transparent",
         },
       }}
