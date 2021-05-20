@@ -45,8 +45,6 @@ const styles = StyleSheet.create({
   profile: {
     width: 110,
     height: 110,
-    borderWidth: 1,
-    borderColor: COLORS.secondary,
     borderRadius: 100,
   },
   itemDetailsText: {
@@ -57,9 +55,6 @@ const styles = StyleSheet.create({
   itemDetails: {
     width: 60,
     height: 60,
-    borderWidth: 1,
-    borderColor: COLORS.secondary,
     borderRadius: 50,
-    // backgroundColor: "yellow",
   },
 });

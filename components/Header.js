@@ -121,6 +121,21 @@ export default function Header({
             height: 40,
           }}
         />
+        <TouchableOpacity
+          onPress={() => {
+            getSearchString("");
+          }}
+          style={styles.deleteSearchStringBtn}
+        >
+          <Text
+            style={{
+              color: COLORS.white,
+              fontSize: 10,
+            }}
+          >
+            X
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -360,5 +375,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: "center",
     textAlignVertical: "center",
+  },
+  deleteSearchStringBtn: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLORS.darkgray,
+    marginRight: 4,
   },
 });

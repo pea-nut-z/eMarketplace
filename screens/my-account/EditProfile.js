@@ -71,7 +71,7 @@ export default function EditProfile({ route, navigation }) {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [1, 1],
       quality: 1,
     });
 
@@ -128,11 +128,7 @@ export default function EditProfile({ route, navigation }) {
             style={{
               width: 150,
               height: 150,
-              justifyContent: "center",
-              alignItems: "center",
-              borderWidth: 1,
-              borderColor: COLORS.secondary,
-              borderRadius: 100,
+              borderRadius: 300,
             }}
           />
         ) : (

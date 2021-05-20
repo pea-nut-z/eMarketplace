@@ -26,6 +26,7 @@ export default function MyAccount({ navigation }) {
           flexDirection: "row",
           justifyContent: "center",
           alignItems: "center",
+          marginTop: SIZES.padding * 2,
         }}
       >
         <MemberInfo

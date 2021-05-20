@@ -104,7 +104,7 @@ export default function Sell({ route, navigation }) {
     if (!title) {
       setAlertMsg("Enter a title");
       setAlert(true);
-    } else if (category === "Categories") {
+    } else if (!category) {
       setAlertMsg("Select a category");
       setAlert(true);
     } else if (!description) {
@@ -352,7 +352,7 @@ export default function Sell({ route, navigation }) {
           }}
         />
         {/* DESCRIPTION */}
-        <View style={{ height: 450 }}>
+        <View style={{ height: 160 }}>
           <Textarea
             containerStyle={{
               ...styles.container,
@@ -382,7 +382,6 @@ const styles = StyleSheet.create({
   },
   uploadImgContainer: {
     flex: 1,
-    // height: SIZES.height * 0.132,
     alignItems: "center",
     flexDirection: "row",
   },
@@ -439,7 +438,7 @@ const styles = StyleSheet.create({
   },
   textareaContainer: {
     top: SIZES.height * 0.066,
-    height: SIZES.height * 0.43,
+    height: SIZES.height * 0.45,
   },
   textarea: {
     textAlignVertical: "top",

@@ -25,7 +25,8 @@ const members = {
   222: {
     username: "Paul",
     location: "Etobicoke",
-    displayPic: "https://cdn.britannica.com/64/126664-050-35C7CECA/Paul-Newman.jpg",
+    displayPic:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHBKIQ3nJDvcaM1yFmPXGBq24kgZJxTDBe9A&usqp=CAU",
     joined: "March 22, 2019",
   },
   333: {
@@ -123,21 +124,7 @@ const listings = {
       category: "Baby & kids",
       description: "Pellentesque habitant morbi tristique senectus et.",
     },
-    14: {
-      status: "Active",
-      date: new Date("Thu Feb 04 2021 20:36:28 GMT-0500 (Eastern Standard Time").toString(),
-      chats: 0,
-      favourites: 0,
-      views: 0,
-      images: ["https://images.indianexpress.com/2019/12/GettyImages-1085654634.jpg"],
-      title: "Makeup brushes",
-      price: 60,
-      free: false,
-      negotiable: true,
-      category: "Health & beauty",
-      description:
-        "Malesuada fames ac turpis egestas. Nam et mauris tincidunt, lacinia mauris non, venenatis quam. Duis odio metus, sodales eget quam sed, dictum egestas mi. Ut scelerisque risus enim, at viverra turpis eleifend a. Praesent erat arcu, rhoncus in pellentesque at, sagittis malesuada justo. Mauris vulputate est ut risus mollis, non blandit libero pretium. Phasellus tincidunt nunc in sapien elementum malesuada. Mauris tincidunt nisl eget nibh blandit viverra. Quisque rutrum, lacus at dapibus auctor, sem quam placerat justo, vitae aliquet massa turpis a libero.",
-    },
+
     15: {
       status: "Active",
       date: new Date("Thu Feb 04 2021 20:36:28 GMT-0500 (Eastern Standard Time").toString(),
@@ -172,25 +159,7 @@ const listings = {
       description:
         "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam et mauris tincidunt, lacinia mauris non, venenatis quam. Duis odio metus, sodales eget quam sed, dictum egestas mi. Ut scelerisque risus enim, at viverra turpis eleifend a. Praesent erat arcu, rhoncus in pellentesque at, sagittis malesuada justo. Mauris vulputate est ut risus mollis, non blandit libero pretium. Phasellus tincidunt nunc in sapien elementum malesuada. Mauris tincidunt nisl eget nibh blandit viverra. Quisque rutrum, lacus at dapibus auctor, sem quam placerat justo, vitae aliquet massa turpis a libero.",
     },
-    5: {
-      status: "Active",
-      date: new Date("Thu Feb 09 2021 20:36:28 GMT-0500 (Eastern Standard Time").toString(),
 
-      chats: 0,
-      favourites: 0,
-      views: 0,
-      images: [
-        "https://imagescdn.simons.ca/images/6772/200964/45/A1_2.jpg?__=19",
-        "https://imagescdn.simons.ca/images/6772/200964/1/A1_1.jpg?__=19",
-      ],
-      title: "Dress",
-      price: 70,
-      free: false,
-      negotiable: true,
-      category: "Women's fashion",
-      description:
-        "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam et mauris tincidunt, lacinia mauris non, venenatis quam. Duis odio metus, sodales eget quam sed, dictum egestas mi. Ut scelerisque risus enim, at viverra turpis eleifend a. Praesent erat arcu, rhoncus in pellentesque at, sagittis malesuada justo. Mauris vulputate est ut risus mollis, non blandit libero pretium. Phasellus tincidunt nunc in sapien elementum malesuada. Mauris tincidunt nisl eget nibh blandit viverra. Quisque rutrum, lacus at dapibus auctor, sem quam placerat justo, vitae aliquet massa turpis a libero.",
-    },
     6: {
       status: "Active",
       date: new Date("Thu Jun 04 2019 20:36:28 GMT-0500 (Eastern Standard Time").toString(),
@@ -229,6 +198,25 @@ const listings = {
     },
   },
   333: {
+    5: {
+      status: "Active",
+      date: new Date("Thu Feb 09 2021 20:36:28 GMT-0500 (Eastern Standard Time").toString(),
+
+      chats: 0,
+      favourites: 0,
+      views: 0,
+      images: [
+        "https://imagescdn.simons.ca/images/6772/200964/45/A1_2.jpg?__=19",
+        "https://imagescdn.simons.ca/images/6772/200964/1/A1_1.jpg?__=19",
+      ],
+      title: "Dress",
+      price: 70,
+      free: false,
+      negotiable: true,
+      category: "Women's fashion",
+      description:
+        "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam et mauris tincidunt, lacinia mauris non, venenatis quam. Duis odio metus, sodales eget quam sed, dictum egestas mi. Ut scelerisque risus enim, at viverra turpis eleifend a. Praesent erat arcu, rhoncus in pellentesque at, sagittis malesuada justo. Mauris vulputate est ut risus mollis, non blandit libero pretium. Phasellus tincidunt nunc in sapien elementum malesuada. Mauris tincidunt nisl eget nibh blandit viverra. Quisque rutrum, lacus at dapibus auctor, sem quam placerat justo, vitae aliquet massa turpis a libero.",
+    },
     8: {
       status: "Active",
       date: new Date("Thu Feb 09 2021 20:36:28 GMT-0500 (Eastern Standard Time").toString(),
@@ -270,6 +258,21 @@ const listings = {
       negotiable: true,
       price: "",
       title: "TESTING DRAFT NOT TO BE DISPLAYED",
+    },
+    14: {
+      status: "Active",
+      date: new Date("Thu Feb 04 2021 20:36:28 GMT-0500 (Eastern Standard Time").toString(),
+      chats: 0,
+      favourites: 0,
+      views: 0,
+      images: ["https://images.indianexpress.com/2019/12/GettyImages-1085654634.jpg"],
+      title: "Makeup brushes",
+      price: 60,
+      free: false,
+      negotiable: true,
+      category: "Health & beauty",
+      description:
+        "Malesuada fames ac turpis egestas. Nam et mauris tincidunt, lacinia mauris non, venenatis quam. Duis odio metus, sodales eget quam sed, dictum egestas mi. Ut scelerisque risus enim, at viverra turpis eleifend a. Praesent erat arcu, rhoncus in pellentesque at, sagittis malesuada justo. Mauris vulputate est ut risus mollis, non blandit libero pretium. Phasellus tincidunt nunc in sapien elementum malesuada. Mauris tincidunt nisl eget nibh blandit viverra. Quisque rutrum, lacus at dapibus auctor, sem quam placerat justo, vitae aliquet massa turpis a libero.",
     },
   },
 };

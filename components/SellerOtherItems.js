@@ -45,11 +45,9 @@ export default function SellerOtherItems({ sellerId, itemId, navigation }) {
                   source={typeof img === "number" ? img : { uri: img }}
                   resizeMode={"contain"}
                   style={{
-                    paddingVertical: SIZES.padding,
                     width: SIZES.width / 2 - SIZES.padding * 6,
                     height: SIZES.width / 2 - SIZES.padding * 6,
                     borderWidth: 1,
-                    borderRadius: 10,
                     borderColor: COLORS.secondary,
                     backgroundColor: typeof img === "number" ? COLORS.secondary : COLORS.white,
                   }}
