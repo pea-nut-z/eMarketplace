@@ -45,4 +45,7 @@ Your username is Tony once you are on the app. The app includes:
 
 ### Road blocks
 
-The app was meant to operate on an iOS device. However, as I have mentioned Expo does not support viewers on iOS (I goofed,I know!). I will be fixing bugs that occur when viewing on an Android device/emulator.
+The app was meant to operate on an iOS device. However, as I have mentioned Expo does not support viewers on iOS (I goofed,I know!). I will be fixing incompatibilities that occur when viewing on an Android device/emulator.
+
+_Updates_
+All known incompatibilities have been fixed.
