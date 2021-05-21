@@ -27,6 +27,8 @@ export default function Sell({ route, navigation }) {
   const existingItem = useSelector((state) => state["listings"][userId][existingItemId]);
 
   const maxNumOfImg = 10;
+  const [dropDown, setDropDown] = useState(false);
+  const [dropDownItems, setDropDownItems] = useState(categoryDropDown);
   const [numOfImg, setNumOfImg] = useState(existingItem?.images.length || 0);
   const [images, setImages] = useState(existingItem?.images || []);
   const [title, setTitle] = useState(existingItem?.title || "");
@@ -335,24 +337,32 @@ export default function Sell({ route, navigation }) {
         </View>
         {/* CATEGORIES */}
         <DropDownPicker
-          defaultValue={existingItem && category}
-          items={categoryDropDown}
-          placeholder="Categories"
-          onChangeItem={(item) => setCategory(item.value)}
-          dropDownMaxHeight={categoryDropDown.length * SIZES.height}
+          open={dropDown}
+          value={category}
+          items={dropDownItems}
+          placeholder="Select a category..."
+          setOpen={setDropDown}
+          setValue={setCategory}
+          setItems={setDropDownItems}
+          disableBorderRadius={true}
+          listMode="SCROLLVIEW"
           style={{
-            ...styles.container,
-            ...styles.dropDown,
-            ...styles.regularHeight,
+            borderRadius: 0,
+            borderColor: "transparent",
+            backgroundColor: COLORS.lightGray4,
+            borderBottomColor: COLORS.secondary,
           }}
-          labelStyle={{}}
-          itemStyle={{
-            justifyContent: "flex-start",
-            paddingHorizontal: SIZES.padding * 2,
+          placeholderStyle={{
+            color: COLORS.secondary,
+            marginLeft: SIZES.padding,
+          }}
+          dropDownContainerStyle={{
+            borderRadius: 0,
+            borderColor: COLORS.secondary,
           }}
         />
         {/* DESCRIPTION */}
-        <View style={{ height: 160 }}>
+        <View style={{ height: 200 }}>
           <Textarea
             containerStyle={{
               ...styles.container,
@@ -363,7 +373,6 @@ export default function Sell({ route, navigation }) {
             maxLength={600}
             placeholder={"Describe your item in as much detail as you can."}
             underlineColorAndroid={"transparent"}
-            style={styles.textarea}
           />
         </View>
       </KeyboardAwareScrollView>
@@ -437,10 +446,6 @@ const styles = StyleSheet.create({
     width: SIZES.width,
   },
   textareaContainer: {
-    top: SIZES.height * 0.066,
     height: SIZES.height * 0.45,
-  },
-  textarea: {
-    textAlignVertical: "top",
   },
 });

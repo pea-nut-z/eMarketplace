@@ -1,10 +1,9 @@
-import React, { useMemo, useEffect, ScrollView } from "react";
+import React, { useMemo, useEffect, useState, ScrollView } from "react";
 import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useDispatch, useSelector } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
-
 import { useScrollToTop } from "@react-navigation/native";
 
 import {
@@ -41,6 +40,11 @@ export default function itemDetails({ route, navigation }) {
   // SELLER'S LISTINGS
   const getSellerAllItems = useMemo(selectMemberAllItems, []);
   const sellerAllItems = useSelector((state) => getSellerAllItems(state, sellerId));
+
+  // DROPDOWN MENU
+  const [dropDown, setDropDown] = useState(false);
+  const [dropDownItems, setDropDownItems] = useState(itemStatusOptions);
+  const [itemStatus, setItemStatus] = useState(item.status);
 
   const dispatch = useDispatch();
 
@@ -109,30 +113,36 @@ export default function itemDetails({ route, navigation }) {
         >
           {userId === sellerId && (
             <DropDownPicker
-              items={itemStatusOptions}
-              containerStyle={{
-                width: 110,
-                height: 40,
-                margin: SIZES.padding * 2,
-              }}
-              placeholder={item.status}
-              onChangeItem={(item) => {
+              open={dropDown}
+              value={itemStatus}
+              items={dropDownItems}
+              placeholder={itemStatus}
+              setOpen={setDropDown}
+              setValue={setItemStatus}
+              onChangeValue={(value) => {
                 dispatch({
                   type: actions.ITEM_STATUS_CHANGED,
                   sellerId,
                   itemId,
-                  status: item.value,
+                  status: value,
                 });
               }}
-              dropDownMaxHeight={itemStatusOptions.length * SIZES.height}
-              labelStyle={
-                {
-                  // ...FONTS.body5,
-                }
-              }
-              itemStyle={{
-                justifyContent: "flex-start",
-                paddingHorizontal: SIZES.padding,
+              setItems={setDropDownItems}
+              disableBorderRadius={true}
+              style={{
+                borderRadius: 0,
+                borderColor: COLORS.secondary,
+                backgroundColor: COLORS.lightGray4,
+                width: 120,
+              }}
+              placeholderStyle={{
+                color: COLORS.secondary,
+                marginLeft: SIZES.padding,
+              }}
+              dropDownContainerStyle={{
+                borderRadius: 0,
+                borderColor: COLORS.secondary,
+                width: 120,
               }}
             />
           )}

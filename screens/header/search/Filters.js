@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, SafeAreaView, StyleSheet } from "react-native";
 import { Border, Header } from "../../../components";
 import { COLORS, categoryOptions, SIZES, FONTS } from "../../../constants";
-import Icon from "react-native-vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
 import CurrencyInput from "react-native-currency-input";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -39,7 +39,7 @@ export default function Filters({
                 }
                 style={styles.categories}
               >
-                <Icon
+                <Ionicons
                   name="checkmark-circle-outline"
                   size={25}
                   color={categories.includes(name) ? COLORS.primary : COLORS.secondary}
@@ -75,7 +75,7 @@ export default function Filters({
                 width: "50%",
               }}
             >
-              <Icon
+              <Ionicons
                 name={sort === "Relevance" ? "ellipse" : "ellipse-outline"}
                 size={25}
                 color={sort === "Relevance" ? COLORS.primary : null}
@@ -91,7 +91,7 @@ export default function Filters({
                 alignItems: "center",
               }}
             >
-              <Icon
+              <Ionicons
                 name={sort === "Most recent" ? "ellipse" : "ellipse-outline"}
                 size={25}
                 color={sort === "Most recent" ? COLORS.primary : null}
