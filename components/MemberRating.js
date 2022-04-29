@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
 import { icons, COLORS, SIZES } from "../constants";
-import Tooltip from "rn-tooltip";
+// import Tooltip from "rn-tooltip";
 
 export default function MemberRating({ memberId, atItemDetails }) {
   //  MEMBER RATING INFO
@@ -66,7 +66,7 @@ export default function MemberRating({ memberId, atItemDetails }) {
       </View>
 
       {/* TOOLTIP */}
-      <Tooltip
+      {/* <Tooltip
         popover={
           <Text style={{ color: COLORS.white }}>
             The review rating is calculated by using an average.
@@ -88,7 +88,7 @@ export default function MemberRating({ memberId, atItemDetails }) {
           <Text style={{ textDecorationLine: "underline" }}>ShopApp Rating</Text>
           <Text> ⓘ</Text>
         </View>
-      </Tooltip>
+      </Tooltip> */}
     </View>
   );
 }

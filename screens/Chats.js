@@ -11,7 +11,6 @@ import {
 import { Header } from "../components";
 import { icons, SIZES, FONTS, COLORS } from "../constants";
 import AsyncStorage from "@react-native-community/async-storage";
-import { auth } from "../firebase";
 
 export default function Chats() {
   const userId = 111;
